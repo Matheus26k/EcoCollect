@@ -154,6 +154,35 @@ npm run test:api
 **Como corrigir**: Configurar calendário para só mostrar datas futuras
 **Prioridade**: Média
 
+### Bug #002 - Validação de Nome
+**O que acontece**: Campo nome aceita apenas números ou caracteres especiais
+
+**Como reproduzir**:
+1. Abrir formulário de agendamento
+2. Digitar apenas números no campo nome (ex: "123456")
+3. Preencher outros campos obrigatórios
+4. Clicar em "Agendar"
+
+**O que deveria acontecer**: Validar se o nome contém pelo menos algumas letras
+**O que acontece**: Aceita nomes inválidos como "123" ou "@#$"
+
+**Como corrigir**: Adicionar validação para garantir que o nome contenha letras
+**Prioridade**: Baixa
+
+### Bug #003 - Feedback Visual no CEP
+**O que acontece**: Não há indicação visual clara quando CEP é inválido
+
+**Como reproduzir**:
+1. Abrir formulário de agendamento
+2. Digitar CEP inválido (ex: "12345-999")
+3. Aguardar busca
+
+**O que deveria acontecer**: Mostrar indicação visual clara de CEP inválido
+**O que acontece**: Apenas limpa os campos sem feedback visual adequado
+
+**Como corrigir**: Adicionar borda vermelha ou ícone de erro no campo CEP
+**Prioridade**: Baixa
+
 ## 📋 Status dos Requisitos
 
 ### Requisitos Funcionais Atendidos ✅
@@ -173,8 +202,8 @@ npm run test:api
 - RQNF7: Documentação README
 - RQNF8: Revisão de código manual
 - RQNF9: Especificações Gherkin
-- RQNF10: Plano de testes
-- RQNF11: Relatório de bugs
+- RQNF10: Plano de testes (`docs/plano-de-testes.md`)
+- RQNF11: Relatório de bugs (`docs/relatorio-bugs.md`)
 - RQNF12: Requisitos não atendidos documentados
 - RQNF14: Migrations de banco
 

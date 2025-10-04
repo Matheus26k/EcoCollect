@@ -69,7 +69,6 @@ export default function Home() {
         setValue('endereco', '');
         setValue('bairro', '');
         setValue('cidade', '');
-        toast.error('CEP não encontrado');
       }
     }
   };
@@ -351,7 +350,6 @@ export default function Home() {
                     await trigger('dataSugerida');
                   }}
                   type="date"
-                  min={minDate}
                   className="input-field"
                 />
                 {errors.dataSugerida && (
