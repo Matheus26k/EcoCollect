@@ -1,21 +1,24 @@
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
+import crypto from 'crypto';
 
 const prisma = new PrismaClient();
 
 async function main() {
-  // Criar usuário administrador
-  const hashedPassword = await bcrypt.hash('admin123', 10);
+  // Gerar credenciais aleatórias para admin
+  const adminEmail = 'admin@ecocollect.com';
+  const adminPassword = crypto.randomBytes(8).toString('hex');
+  const hashedPassword = await bcrypt.hash(adminPassword, 10);
   
   // Deletar usuário existente se houver
   await prisma.user.deleteMany({
-    where: { email: 'admin@ecocollect.com' }
+    where: { email: adminEmail }
   });
 
   // Criar novo usuário
   await prisma.user.create({
     data: {
-      email: 'admin@ecocollect.com',
+      email: adminEmail,
       password: hashedPassword,
       name: 'Administrador EcoCollect',
       role: 'admin'
@@ -41,7 +44,10 @@ async function main() {
   }
 
   console.log('✅ Seed executado com sucesso!');
-  console.log('👤 Usuário admin criado: admin@ecocollect.com / admin123');
+  console.log('🔐 CREDENCIAIS DE ACESSO ADMINISTRATIVO:');
+  console.log(`📧 Email: ${adminEmail}`);
+  console.log(`🔑 Senha: ${adminPassword}`);
+  console.log('⚠️  IMPORTANTE: Guarde essas credenciais em local seguro!');
 }
 
 main()

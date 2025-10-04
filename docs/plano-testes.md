@@ -50,9 +50,9 @@ npm run cypress:run
 
 ## Dados para teste
 
-- **Admin**: admin@ecocollect.com / admin123
 - **Protocolo exemplo**: ECO-2024-001
 - **Materiais**: Papel, Plástico, Metal, Vidro
+- **Admin**: Credenciais criadas durante o seed
 
 ## O que esperamos
 

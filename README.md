@@ -47,14 +47,16 @@ cd backend
 npm install
 ```
 
-**2. Configurar banco de dados:
+**2. Configurar banco de dados:**
 ```bash
 # Executar migrations
 npx prisma migrate dev --name init
 
-# Executar seed (dados iniciais)
+# Executar seed (dados iniciais e credenciais admin)
 npm run seed
 ```
+
+⚠️ **IMPORTANTE**: O seed gerará credenciais aleatórias para o administrador. Anote as credenciais exibidas no console!
 
 **3. Instalar dependências do frontend:**
 ```bash
@@ -80,6 +82,10 @@ npm start
 - **Frontend**: http://localhost:3000
 - **Backend API**: http://localhost:3001
 - **Banco SQLite**: `backend/dev.db`
+
+### Acesso Administrativo
+- **Token de acesso**: `ECO2024ADMIN`
+- Digite o token na tela de login para revelar as credenciais
 
 ## 🧪 Testes
 
@@ -192,6 +198,9 @@ npm run test:api
 ## 🔒 Segurança
 
 - Autenticação JWT
+- Token de acesso para credenciais administrativas
+- Credenciais protegidas na interface
+- Senhas criptografadas com bcrypt
 - Validação de dados
 - Proteção CORS
 - Sanitização de inputs

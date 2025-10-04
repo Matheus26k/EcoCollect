@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Navigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { LogIn, Copy } from 'lucide-react';
+import { LogIn, Copy, Key } from 'lucide-react';
 import Logo from '../components/Logo';
 import { useAuth } from '../hooks/useAuth';
 
@@ -11,9 +11,13 @@ interface LoginForm {
   password: string;
 }
 
+const ADMIN_TOKEN = 'ECO2024ADMIN';
+
 export default function Login() {
   const { login, isAuthenticated } = useAuth();
   const { register, handleSubmit, formState: { errors, isSubmitting }, setValue } = useForm<LoginForm>();
+  const [showCredentials, setShowCredentials] = useState(false);
+  const [tokenInput, setTokenInput] = useState('');
 
   const copyToClipboard = (text: string, type: string) => {
     navigator.clipboard.writeText(text);
@@ -24,6 +28,16 @@ export default function Login() {
     setValue('email', 'admin@ecocollect.com');
     setValue('password', 'admin123');
     toast.info('Credenciais preenchidas!');
+  };
+
+  const validateToken = () => {
+    if (tokenInput === ADMIN_TOKEN) {
+      setShowCredentials(true);
+      toast.success('Token válido! Credenciais liberadas.');
+    } else {
+      toast.error('Token inválido!');
+      setTokenInput('');
+    }
   };
 
   if (isAuthenticated) {
@@ -125,44 +139,72 @@ export default function Login() {
           </div>
         </form>
 
-        <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
-          <h3 className="text-sm font-medium text-green-800 mb-3">🔑 Credenciais de Acesso:</h3>
-          <div className="space-y-2">
-            <div className="flex items-center justify-between p-2 bg-white rounded border">
-              <span className="text-sm text-gray-600">E-mail:</span>
-              <div className="flex items-center space-x-2">
-                <code className="text-sm font-mono text-green-700 bg-green-100 px-2 py-1 rounded">admin@ecocollect.com</code>
-                <button
-                  type="button"
-                  onClick={() => copyToClipboard('admin@ecocollect.com', 'E-mail')}
-                  className="p-1 text-green-600 hover:text-green-800 transition-colors"
-                >
-                  <Copy className="h-3 w-3" />
-                </button>
-              </div>
+        {!showCredentials ? (
+          <div className="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+            <h3 className="text-sm font-medium text-yellow-800 mb-3 flex items-center">
+              <Key className="h-4 w-4 mr-2" />
+              Acesso às Credenciais
+            </h3>
+            <div className="flex space-x-2">
+              <input
+                type="password"
+                value={tokenInput}
+                onChange={(e) => setTokenInput(e.target.value)}
+                placeholder="Digite o token de acesso"
+                className="flex-1 px-3 py-2 border border-yellow-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500"
+              />
+              <button
+                type="button"
+                onClick={validateToken}
+                className="px-4 py-2 bg-yellow-600 hover:bg-yellow-700 text-white text-sm font-medium rounded transition-colors"
+              >
+                Validar
+              </button>
             </div>
-            <div className="flex items-center justify-between p-2 bg-white rounded border">
-              <span className="text-sm text-gray-600">Senha:</span>
-              <div className="flex items-center space-x-2">
-                <code className="text-sm font-mono text-green-700 bg-green-100 px-2 py-1 rounded">admin123</code>
-                <button
-                  type="button"
-                  onClick={() => copyToClipboard('admin123', 'Senha')}
-                  className="p-1 text-green-600 hover:text-green-800 transition-colors"
-                >
-                  <Copy className="h-3 w-3" />
-                </button>
-              </div>
-            </div>
+            <p className="text-xs text-yellow-700 mt-2">
+              Token necessário para visualizar credenciais administrativas
+            </p>
           </div>
-          <button
-            type="button"
-            onClick={fillCredentials}
-            className="w-full mt-3 px-3 py-2 bg-green-100 hover:bg-green-200 text-green-800 text-sm font-medium rounded transition-colors"
-          >
-            ⚡ Preencher Automaticamente
-          </button>
-        </div>
+        ) : (
+          <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+            <h3 className="text-sm font-medium text-green-800 mb-3">🔑 Credenciais de Acesso:</h3>
+            <div className="space-y-2">
+              <div className="flex items-center justify-between p-2 bg-white rounded border">
+                <span className="text-sm text-gray-600">E-mail:</span>
+                <div className="flex items-center space-x-2">
+                  <code className="text-sm font-mono text-green-700 bg-green-100 px-2 py-1 rounded">admin@ecocollect.com</code>
+                  <button
+                    type="button"
+                    onClick={() => copyToClipboard('admin@ecocollect.com', 'E-mail')}
+                    className="p-1 text-green-600 hover:text-green-800 transition-colors"
+                  >
+                    <Copy className="h-3 w-3" />
+                  </button>
+                </div>
+              </div>
+              <div className="flex items-center justify-between p-2 bg-white rounded border">
+                <span className="text-sm text-gray-600">Senha:</span>
+                <div className="flex items-center space-x-2">
+                  <code className="text-sm font-mono text-green-700 bg-green-100 px-2 py-1 rounded">admin123</code>
+                  <button
+                    type="button"
+                    onClick={() => copyToClipboard('admin123', 'Senha')}
+                    className="p-1 text-green-600 hover:text-green-800 transition-colors"
+                  >
+                    <Copy className="h-3 w-3" />
+                  </button>
+                </div>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={fillCredentials}
+              className="w-full mt-3 px-3 py-2 bg-green-100 hover:bg-green-200 text-green-800 text-sm font-medium rounded transition-colors"
+            >
+              ⚡ Preencher Automaticamente
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
