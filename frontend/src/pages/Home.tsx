@@ -14,6 +14,7 @@ import { format, addDays } from 'date-fns';
 export default function Home() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [protocolo, setProtocolo] = useState('');
+  const [cepValidated, setCepValidated] = useState(false);
   const phoneFormat = usePhoneFormat();
   const { lookupCep, loading: cepLoading, formatCep } = useCepLookup();
 
@@ -25,15 +26,29 @@ export default function Home() {
     await trigger('cep');
     
     const cleanCep = e.target.value.replace(/\D/g, '');
+    
+    if (cleanCep.length < 8) {
+      setCepValidated(false);
+      setValue('endereco', '');
+      setValue('bairro', '');
+      setValue('cidade', '');
+      return;
+    }
+    
     if (cleanCep.length === 8) {
       const cepData = await lookupCep(cleanCep);
       if (cepData) {
+        setCepValidated(true);
         setValue('endereco', cepData.logradouro);
         setValue('bairro', cepData.bairro);
         setValue('cidade', cepData.localidade);
         await trigger(['endereco', 'bairro', 'cidade']);
         toast.success('Endereço preenchido automaticamente!');
       } else {
+        setCepValidated(false);
+        setValue('endereco', '');
+        setValue('bairro', '');
+        setValue('cidade', '');
         toast.error('CEP não encontrado');
       }
     }
@@ -186,8 +201,9 @@ export default function Home() {
                       setValue('endereco', e.target.value);
                       await trigger('endereco');
                     }}
-                    className="input-field"
-                    placeholder="Rua, avenida..."
+                    disabled={!cepValidated}
+                    className={`input-field ${!cepValidated ? 'bg-gray-100 cursor-not-allowed' : ''}`}
+                    placeholder={cepValidated ? "Rua, avenida..." : "Digite um CEP válido primeiro"}
                   />
                   {errors.endereco && (
                     <p className="text-red-500 text-sm mt-1">{errors.endereco.message}</p>
@@ -203,8 +219,9 @@ export default function Home() {
                       setValue('numero', e.target.value);
                       await trigger('numero');
                     }}
-                    className="input-field"
-                    placeholder="123"
+                    disabled={!cepValidated}
+                    className={`input-field ${!cepValidated ? 'bg-gray-100 cursor-not-allowed' : ''}`}
+                    placeholder={cepValidated ? "123" : "Digite um CEP válido primeiro"}
                   />
                   {errors.numero && (
                     <p className="text-red-500 text-sm mt-1">{errors.numero.message}</p>
@@ -223,8 +240,9 @@ export default function Home() {
                       setValue('bairro', e.target.value);
                       await trigger('bairro');
                     }}
-                    className="input-field"
-                    placeholder="Nome do bairro"
+                    disabled={!cepValidated}
+                    className={`input-field ${!cepValidated ? 'bg-gray-100 cursor-not-allowed' : ''}`}
+                    placeholder={cepValidated ? "Nome do bairro" : "Digite um CEP válido primeiro"}
                   />
                   {errors.bairro && (
                     <p className="text-red-500 text-sm mt-1">{errors.bairro.message}</p>
@@ -240,8 +258,9 @@ export default function Home() {
                       setValue('cidade', e.target.value);
                       await trigger('cidade');
                     }}
-                    className="input-field"
-                    placeholder="Nome da cidade"
+                    disabled={!cepValidated}
+                    className={`input-field ${!cepValidated ? 'bg-gray-100 cursor-not-allowed' : ''}`}
+                    placeholder={cepValidated ? "Nome da cidade" : "Digite um CEP válido primeiro"}
                   />
                   {errors.cidade && (
                     <p className="text-red-500 text-sm mt-1">{errors.cidade.message}</p>
