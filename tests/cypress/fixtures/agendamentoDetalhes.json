@@ -1,0 +1,34 @@
+{
+  "id": "1",
+  "protocolo": "COL-123456-ABC",
+  "nomeCompleto": "João Silva",
+  "endereco": "Rua das Flores, 123",
+  "numero": "123",
+  "bairro": "Centro",
+  "cidade": "São Paulo",
+  "telefone": "(11) 99999-9999",
+  "email": "joao@email.com",
+  "dataSugerida": "2024-01-15T00:00:00.000Z",
+  "status": "Pendente",
+  "observacoes": null,
+  "dataAtualizacao": "2024-01-10T10:00:00.000Z",
+  "createdAt": "2024-01-10T10:00:00.000Z",
+  "materiais": [
+    {
+      "material": {
+        "id": "1",
+        "name": "Papel",
+        "description": "Jornais, revistas, papelão",
+        "category": "seco"
+      }
+    },
+    {
+      "material": {
+        "id": "2",
+        "name": "Plástico",
+        "description": "Garrafas PET, embalagens",
+        "category": "seco"
+      }
+    }
+  ]
+}

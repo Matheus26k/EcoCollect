@@ -1,0 +1,14 @@
+{
+  "name": "ecocollect-tests",
+  "version": "1.0.0",
+  "description": "Testes E2E para EcoCollect - Coletas Sustentáveis",
+  "scripts": {
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "cypress:run:headless": "cypress run --headless"
+  },
+  "devDependencies": {
+    "cypress": "^13.6.0",
+    "@cypress/code-coverage": "^3.12.8"
+  }
+}

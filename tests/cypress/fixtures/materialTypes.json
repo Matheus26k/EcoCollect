@@ -1,0 +1,32 @@
+[
+  {
+    "id": "1",
+    "name": "Papel",
+    "description": "Jornais, revistas, papelão",
+    "category": "seco"
+  },
+  {
+    "id": "2",
+    "name": "Plástico",
+    "description": "Garrafas PET, embalagens",
+    "category": "seco"
+  },
+  {
+    "id": "3",
+    "name": "Vidro",
+    "description": "Garrafas, potes, frascos",
+    "category": "seco"
+  },
+  {
+    "id": "4",
+    "name": "Metal",
+    "description": "Latas de alumínio, ferro",
+    "category": "seco"
+  },
+  {
+    "id": "5",
+    "name": "Eletrônicos",
+    "description": "Celulares, computadores, pilhas",
+    "category": "eletrônico"
+  }
+]

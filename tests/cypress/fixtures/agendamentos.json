@@ -1,0 +1,122 @@
+[
+  {
+    "id": "1",
+    "protocolo": "COL-123456-ABC",
+    "nomeCompleto": "João Silva",
+    "endereco": "Rua das Flores, 123",
+    "numero": "123",
+    "bairro": "Centro",
+    "cidade": "São Paulo",
+    "telefone": "(11) 99999-9999",
+    "email": "joao@email.com",
+    "dataSugerida": "2024-01-15T00:00:00.000Z",
+    "status": "Pendente",
+    "observacoes": null,
+    "dataAtualizacao": "2024-01-10T10:00:00.000Z",
+    "createdAt": "2024-01-10T10:00:00.000Z",
+    "materiais": [
+      {
+        "material": {
+          "id": "1",
+          "name": "Papel",
+          "description": "Jornais, revistas, papelão",
+          "category": "seco"
+        }
+      },
+      {
+        "material": {
+          "id": "2",
+          "name": "Plástico",
+          "description": "Garrafas PET, embalagens",
+          "category": "seco"
+        }
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "protocolo": "COL-789012-DEF",
+    "nomeCompleto": "Maria Santos",
+    "endereco": "Av. Paulista, 456",
+    "numero": "456",
+    "bairro": "Bela Vista",
+    "cidade": "São Paulo",
+    "telefone": "(11) 88888-8888",
+    "email": "maria@email.com",
+    "dataSugerida": "2024-01-20T00:00:00.000Z",
+    "status": "Agendado",
+    "observacoes": "Coleta agendada para manhã",
+    "dataAtualizacao": "2024-01-12T14:30:00.000Z",
+    "createdAt": "2024-01-11T09:15:00.000Z",
+    "materiais": [
+      {
+        "material": {
+          "id": "3",
+          "name": "Vidro",
+          "description": "Garrafas, potes, frascos",
+          "category": "seco"
+        }
+      }
+    ]
+  },
+  {
+    "id": "3",
+    "protocolo": "COL-345678-GHI",
+    "nomeCompleto": "Pedro Oliveira",
+    "endereco": "Rua Augusta, 789",
+    "numero": "789",
+    "bairro": "Consolação",
+    "cidade": "São Paulo",
+    "telefone": "(11) 77777-7777",
+    "email": null,
+    "dataSugerida": "2024-01-18T00:00:00.000Z",
+    "status": "Concluído",
+    "observacoes": "Coleta realizada com sucesso",
+    "dataAtualizacao": "2024-01-18T16:45:00.000Z",
+    "createdAt": "2024-01-13T11:20:00.000Z",
+    "materiais": [
+      {
+        "material": {
+          "id": "4",
+          "name": "Metal",
+          "description": "Latas de alumínio, ferro",
+          "category": "seco"
+        }
+      },
+      {
+        "material": {
+          "id": "5",
+          "name": "Eletrônicos",
+          "description": "Celulares, computadores, pilhas",
+          "category": "eletrônico"
+        }
+      }
+    ]
+  },
+  {
+    "id": "4",
+    "protocolo": "COL-901234-JKL",
+    "nomeCompleto": "Ana Costa",
+    "endereco": "Rua da Liberdade, 321",
+    "numero": "321",
+    "bairro": "Liberdade",
+    "cidade": "São Paulo",
+    "telefone": "(11) 66666-6666",
+    "email": "ana@email.com",
+    "dataSugerida": "2024-01-25T00:00:00.000Z",
+    "status": "Pendente",
+    "observacoes": null,
+    "dataAtualizacao": "2024-01-14T08:00:00.000Z",
+    "createdAt": "2024-01-14T08:00:00.000Z",
+    "materiais": [
+      {
+        "material": {
+          "id": "1",
+          "name": "Papel",
+          "description": "Jornais, revistas, papelão",
+          "category": "seco"
+        }
+      }
+    ]
+  }
+]
