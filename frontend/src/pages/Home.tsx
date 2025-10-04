@@ -17,11 +17,12 @@ export default function Home() {
   const phoneFormat = usePhoneFormat();
   const { lookupCep, loading: cepLoading, formatCep } = useCepLookup();
 
-  const { register, handleSubmit, formState: { errors }, reset, watch, setValue } = useForm<CreateAgendamentoData>();
+  const { register, handleSubmit, formState: { errors }, reset, watch, setValue, trigger } = useForm<CreateAgendamentoData>({ mode: 'onChange' });
 
   const handleCepChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const formatted = formatCep(e.target.value);
     setValue('cep', formatted);
+    await trigger('cep');
     
     const cleanCep = e.target.value.replace(/\D/g, '');
     if (cleanCep.length === 8) {
@@ -30,6 +31,7 @@ export default function Home() {
         setValue('endereco', cepData.logradouro);
         setValue('bairro', cepData.bairro);
         setValue('cidade', cepData.localidade);
+        await trigger(['endereco', 'bairro', 'cidade']);
         toast.success('Endereço preenchido automaticamente!');
       } else {
         toast.error('CEP não encontrado');
@@ -136,6 +138,10 @@ export default function Home() {
                     required: 'Nome é obrigatório',
                     minLength: { value: 2, message: 'Nome deve ter pelo menos 2 caracteres' }
                   })}
+                  onChange={async (e) => {
+                    setValue('nomeCompleto', e.target.value);
+                    await trigger('nomeCompleto');
+                  }}
                   className="input-field"
                   placeholder="Seu nome completo"
                 />
@@ -176,6 +182,10 @@ export default function Home() {
                   </label>
                   <input
                     {...register('endereco', { required: 'Endereço é obrigatório' })}
+                    onChange={async (e) => {
+                      setValue('endereco', e.target.value);
+                      await trigger('endereco');
+                    }}
                     className="input-field"
                     placeholder="Rua, avenida..."
                   />
@@ -189,6 +199,10 @@ export default function Home() {
                   </label>
                   <input
                     {...register('numero', { required: 'Número é obrigatório' })}
+                    onChange={async (e) => {
+                      setValue('numero', e.target.value);
+                      await trigger('numero');
+                    }}
                     className="input-field"
                     placeholder="123"
                   />
@@ -205,6 +219,10 @@ export default function Home() {
                   </label>
                   <input
                     {...register('bairro', { required: 'Bairro é obrigatório' })}
+                    onChange={async (e) => {
+                      setValue('bairro', e.target.value);
+                      await trigger('bairro');
+                    }}
                     className="input-field"
                     placeholder="Nome do bairro"
                   />
@@ -218,6 +236,10 @@ export default function Home() {
                   </label>
                   <input
                     {...register('cidade', { required: 'Cidade é obrigatória' })}
+                    onChange={async (e) => {
+                      setValue('cidade', e.target.value);
+                      await trigger('cidade');
+                    }}
                     className="input-field"
                     placeholder="Nome da cidade"
                   />
@@ -241,9 +263,10 @@ export default function Home() {
                       }
                     })}
                     value={phoneFormat.value}
-                    onChange={(e) => {
+                    onChange={async (e) => {
                       const formatted = phoneFormat.onChange(e);
                       setValue('telefone', formatted);
+                      await trigger('telefone');
                     }}
                     className="input-field"
                     placeholder="Digite apenas os números"
@@ -252,9 +275,6 @@ export default function Home() {
                   {errors.telefone && (
                     <p className="text-red-500 text-sm mt-1">{errors.telefone.message}</p>
                   )}
-                  <p className="text-xs text-gray-500 mt-1">
-                    Formato automático: (11) 99999-9999
-                  </p>
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -267,6 +287,10 @@ export default function Home() {
                         message: 'E-mail inválido'
                       }
                     })}
+                    onChange={async (e) => {
+                      setValue('email', e.target.value);
+                      await trigger('email');
+                    }}
                     type="email"
                     className="input-field"
                     placeholder="seu@email.com"
@@ -283,6 +307,10 @@ export default function Home() {
                 </label>
                 <input
                   {...register('dataSugerida', { required: 'Data é obrigatória' })}
+                  onChange={async (e) => {
+                    setValue('dataSugerida', e.target.value);
+                    await trigger('dataSugerida');
+                  }}
                   type="date"
                   min={minDate}
                   className="input-field"
@@ -306,6 +334,9 @@ export default function Home() {
                         {...register('materiais', { required: 'Selecione pelo menos um material' })}
                         type="checkbox"
                         value={material.id}
+                        onChange={async () => {
+                          await trigger('materiais');
+                        }}
                         className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
                       />
                       <span className="text-sm text-gray-700">{material.name}</span>
@@ -319,8 +350,8 @@ export default function Home() {
 
               <button
                 type="submit"
-                disabled={createMutation.isLoading}
-                className="w-full btn-primary"
+                disabled={createMutation.isLoading || Object.keys(errors).length > 0}
+                className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {createMutation.isLoading ? 'Agendando...' : 'Agendar Coleta'}
               </button>
