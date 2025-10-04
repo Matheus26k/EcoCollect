@@ -1,14 +1,13 @@
-# EcoCollect - Coletas Sustentáveis
+# EcoCollect - Sistema de Coletas Recicláveis
 
-Plataforma moderna para agendamento de coletas de materiais recicláveis, conectando cidadãos conscientes com serviços de coleta sustentável.
+Sistema web para agendamento de coletas de materiais recicláveis.
 
-## 🚀 Tecnologias Utilizadas
+## 🚀 Tecnologias
 
-- **Frontend**: React 18 + TypeScript + Tailwind CSS
-- **Backend**: Node.js + Express + TypeScript
-- **Banco de Dados**: SQLite (desenvolvimento)
-- **Testes**: Jest (unitários), Cypress (E2E), Supertest (API)
-- **Desenvolvimento**: Local com SQLite
+- **Frontend**: React + TypeScript
+- **Backend**: Node.js + Express
+- **Banco**: SQLite
+- **Testes**: Jest + Cypress
 
 ## 📋 Funcionalidades
 
@@ -24,13 +23,13 @@ Plataforma moderna para agendamento de coletas de materiais recicláveis, conect
 - ✅ Visualizar detalhes completos
 - ✅ Atualizar status das coletas
 
-## 🏗️ Estrutura do Projeto
+## 📁 Estrutura
 
 ```
-├── frontend/          # Aplicação React com design moderno
-├── backend/           # API Node.js/Express + SQLite
-├── tests/            # Testes automatizados (Unit, API, E2E)
-└── docs/             # Documentação técnica completa
+├── frontend/     # React + TypeScript
+├── backend/      # Node.js + Express + SQLite
+├── tests/        # Testes Jest + Cypress
+└── docs/         # Documentação
 ```
 
 ## 🔧 Configuração e Execução
@@ -107,32 +106,26 @@ cd backend
 npm run test:api
 ```
 
-## 📊 Cobertura de Testes
+## 📊 Testes Implementados
 
-O projeto implementa uma estratégia abrangente de testes:
+### Testes Unitários
+- Regras de negócio (validação de data, protocolo)
+- Funções utilitárias
+- Localização: `backend/src/__tests__/`
 
-### Estratégia de Testes - Curto Prazo
+### Testes de API
+- Endpoints de autenticação
+- CRUD de agendamentos
+- Localização: `backend/src/__tests__/api/`
 
-**Prioridade 1 (Crítica)**
-1. Testes unitários das regras de negócio principais
-2. Testes de API para endpoints críticos (autenticação, CRUD agendamentos)
-3. Testes E2E do fluxo principal (solicitar agendamento)
+### Testes E2E
+- Fluxo de agendamento
+- Dashboard administrativo
+- Localização: `tests/cypress/`
 
-**Prioridade 2 (Alta)**
-1. Testes de validação de formulários
-2. Testes de autorização e segurança
-3. Testes E2E do painel administrativo
-
-**Prioridade 3 (Média)**
-1. Testes de performance básicos
-2. Testes de integração com banco de dados
-3. Testes de responsividade
-
-### Localização dos Arquivos de Teste
-- **Plano de Testes**: `docs/plano-testes.md`
-- **Especificações Gherkin**: `tests/features/`
-- **Testes Unitários**: `backend/src/__tests__/` e `frontend/src/__tests__/`
-- **Testes E2E**: `tests/cypress/`
+### Especificações Gherkin
+- Cenários de uso em português
+- Localização: `tests/features/`
 
 ## 🐛 Relatório de Bugs Identificados
 
@@ -192,30 +185,19 @@ O projeto implementa uma estratégia abrangente de testes:
 - **Impacto**: Baixo - tipos estão pré-definidos no sistema
 - **Status**: Funcionalidade diferencial não implementada
 
-## 🔒 Segurança Implementada
+## 🔒 Segurança
 
 - Autenticação JWT
+- Validação de dados
+- Proteção CORS
 - Sanitização de inputs
-- Validação de dados server-side
-- Headers de segurança (CORS, Helmet)
-- Proteção contra SQL Injection (Prisma ORM)
 
-## 🚀 Melhorias Sugeridas
+## 🚀 Melhorias Futuras
 
-### Curto Prazo (1-2 sprints)
-1. **Validação Client-side**: Melhorar validações em tempo real
-2. **Loading States**: Adicionar indicadores de carregamento
-3. **Error Boundaries**: Implementar tratamento global de erros React
-
-### Médio Prazo (3-6 sprints)
-1. **Cache Redis**: Implementar cache para consultas frequentes
-2. **Logs Estruturados**: Sistema de logging com Winston
-3. **Monitoramento**: Implementar health checks e métricas
-
-### Longo Prazo (6+ sprints)
-1. **Microserviços**: Separar domínios em serviços independentes
-2. **Event Sourcing**: Implementar para auditoria completa
-3. **PWA**: Transformar em Progressive Web App
+- Validação em tempo real
+- Indicadores de carregamento
+- Notificações por email
+- Relatórios de coletas
 
 ## 👥 Contribuição
 
