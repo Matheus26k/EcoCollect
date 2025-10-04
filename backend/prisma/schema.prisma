@@ -37,6 +37,7 @@ model Agendamento {
   id              String   @id @default(cuid())
   protocolo       String   @unique
   nomeCompleto    String
+  cep             String
   endereco        String
   numero          String
   bairro          String

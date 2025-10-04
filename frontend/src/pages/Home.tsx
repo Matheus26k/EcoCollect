@@ -6,6 +6,7 @@ import { Calendar, MapPin, Phone, Mail, Recycle, CheckCircle, Shield, Search } f
 import { Link } from 'react-router-dom';
 import Logo from '../components/Logo';
 import { usePhoneFormat } from '../hooks/usePhoneFormat';
+import { useCepLookup } from '../hooks/useCepLookup';
 import { agendamentoService } from '../services/agendamentoService';
 import { CreateAgendamentoData, MaterialType } from '../types';
 import { format, addDays } from 'date-fns';
@@ -14,8 +15,27 @@ export default function Home() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [protocolo, setProtocolo] = useState('');
   const phoneFormat = usePhoneFormat();
+  const { lookupCep, loading: cepLoading, formatCep } = useCepLookup();
 
   const { register, handleSubmit, formState: { errors }, reset, watch, setValue } = useForm<CreateAgendamentoData>();
+
+  const handleCepChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatCep(e.target.value);
+    setValue('cep', formatted);
+    
+    const cleanCep = e.target.value.replace(/\D/g, '');
+    if (cleanCep.length === 8) {
+      const cepData = await lookupCep(cleanCep);
+      if (cepData) {
+        setValue('endereco', cepData.logradouro);
+        setValue('bairro', cepData.bairro);
+        setValue('cidade', cepData.localidade);
+        toast.success('Endereço preenchido automaticamente!');
+      } else {
+        toast.error('CEP não encontrado');
+      }
+    }
+  };
 
   const { data: materialTypes = [] } = useQuery<MaterialType[]>(
     'materialTypes',
@@ -121,6 +141,31 @@ export default function Home() {
                 />
                 {errors.nomeCompleto && (
                   <p className="text-red-500 text-sm mt-1">{errors.nomeCompleto.message}</p>
+                )}
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  CEP *
+                </label>
+                <input
+                  {...register('cep', { 
+                    required: 'CEP é obrigatório',
+                    pattern: {
+                      value: /^\d{5}-?\d{3}$/,
+                      message: 'CEP inválido'
+                    }
+                  })}
+                  onChange={handleCepChange}
+                  className="input-field"
+                  placeholder="00000-000"
+                  maxLength={9}
+                />
+                {errors.cep && (
+                  <p className="text-red-500 text-sm mt-1">{errors.cep.message}</p>
+                )}
+                {cepLoading && (
+                  <p className="text-blue-500 text-sm mt-1">Buscando endereço...</p>
                 )}
               </div>
 

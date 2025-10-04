@@ -17,6 +17,10 @@ export const agendamentoSchema = Joi.object({
     'string.max': 'Nome deve ter no máximo 100 caracteres',
     'any.required': 'Nome completo é obrigatório'
   }),
+  cep: Joi.string().pattern(/^\d{5}-?\d{3}$/).required().messages({
+    'string.pattern.base': 'CEP deve estar no formato 00000-000',
+    'any.required': 'CEP é obrigatório'
+  }),
   endereco: Joi.string().min(5).max(200).required().messages({
     'string.min': 'Endereço deve ter pelo menos 5 caracteres',
     'any.required': 'Endereço é obrigatório'

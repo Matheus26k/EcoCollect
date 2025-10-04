@@ -9,6 +9,7 @@ export interface Agendamento {
   id: string;
   protocolo: string;
   nomeCompleto: string;
+  cep: string;
   endereco: string;
   numero: string;
   bairro: string;
@@ -27,6 +28,7 @@ export interface Agendamento {
 
 export interface CreateAgendamentoData {
   nomeCompleto: string;
+  cep: string;
   endereco: string;
   numero: string;
   bairro: string;
