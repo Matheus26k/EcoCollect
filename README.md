@@ -50,13 +50,13 @@ npm install
 **2. Configurar banco de dados:**
 ```bash
 # Executar migrations
-npx prisma migrate dev --name init
+npx prisma migrate dev
 
 # Executar seed (dados iniciais e credenciais admin)
 npm run seed
 ```
 
-⚠️ **IMPORTANTE**: O seed gerará credenciais aleatórias para o administrador. Anote as credenciais exibidas no console!
+⚠️ **IMPORTANTE**: O seed criará o usuário administrador com credenciais padrão.
 
 **3. Instalar dependências do frontend:**
 ```bash
@@ -207,10 +207,10 @@ npm run test:api
 
 ## 🚀 Melhorias Futuras
 
-- Validação em tempo real
-- Indicadores de carregamento
-- Notificações por email
+- Paginação na lista de agendamentos
+- Busca por nome/protocolo
 - Relatórios de coletas
+- Notificações em tempo real
 
 ## 👥 Contribuição
 

@@ -87,7 +87,7 @@ export default function Login() {
                 })}
                 type="email"
                 className="mt-1 input-field"
-                placeholder="admin@coletas.com"
+                placeholder="admin@ecocollect.com"
               />
               {errors.email && (
                 <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>

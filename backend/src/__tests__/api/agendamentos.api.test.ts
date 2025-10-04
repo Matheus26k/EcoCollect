@@ -16,7 +16,7 @@ describe('API Agendamentos', () => {
     const loginResponse = await request(app)
       .post('/api/auth/login')
       .send({
-        email: 'admin@coletas.com',
+        email: 'admin@ecocollect.com',
         password: 'admin123'
       });
 

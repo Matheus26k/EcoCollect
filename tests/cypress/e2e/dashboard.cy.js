@@ -7,7 +7,7 @@ describe('Dashboard Administrativo', () => {
         token: 'fake-jwt-token',
         user: {
           id: 'admin-id',
-          email: 'admin@coletas.com',
+          email: 'admin@ecocollect.com',
           name: 'Administrador'
         }
       }
@@ -25,7 +25,7 @@ describe('Dashboard Administrativo', () => {
     cy.contains('Área Administrativa').should('be.visible');
     
     // Fazer login
-    cy.get('input[type="email"]').type('admin@coletas.com');
+    cy.get('input[type="email"]').type('admin@ecocollect.com');
     cy.get('input[type="password"]').type('admin123');
     cy.get('button[type="submit"]').click();
     
@@ -159,8 +159,8 @@ describe('Dashboard Administrativo', () => {
       ]
     }).as('getAgendamentosAtualizado');
     
-    // Aguardar atualização automática (30 segundos)
-    cy.wait('@getAgendamentosAtualizado', { timeout: 35000 });
+    // Aguardar atualização automática
+    cy.wait('@getAgendamentosAtualizado', { timeout: 10000 });
     
     // Verificar novo conteúdo
     cy.contains('Maria Santos').should('be.visible');

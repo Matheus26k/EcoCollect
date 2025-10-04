@@ -1,7 +1,7 @@
 // Comandos customizados do Cypress para EcoCollect
 
 // Comando para fazer login
-Cypress.Commands.add('login', (email = 'admin@coletas.com', password = 'admin123') => {
+Cypress.Commands.add('login', (email = 'admin@ecocollect.com', password = 'admin123') => {
   cy.visit('/login');
   cy.get('input[type="email"]').type(email);
   cy.get('input[type="password"]').type(password);
