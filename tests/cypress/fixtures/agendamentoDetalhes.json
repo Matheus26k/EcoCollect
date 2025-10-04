@@ -2,6 +2,7 @@
   "id": "1",
   "protocolo": "COL-123456-ABC",
   "nomeCompleto": "João Silva",
+  "cep": "01234-567",
   "endereco": "Rua das Flores, 123",
   "numero": "123",
   "bairro": "Centro",
