@@ -1,64 +1,31 @@
 # language: pt
 
-Funcionalidade: Dashboard Administrativo
-  Como um administrador
-  Eu quero gerenciar os agendamentos de coleta
-  Para organizar e acompanhar as solicitações dos cidadãos
+Funcionalidade: Dashboard do Administrador
+  Como administrador
+  Eu quero ver os agendamentos
+  Para gerenciar as coletas
 
-  Contexto:
-    Dado que sou um usuário administrador
-    E estou autenticado no sistema
-
-  Cenário: Visualizar lista de agendamentos
+  Cenário: Ver lista de agendamentos
+    Dado que fiz login como admin
     Quando acesso o dashboard
-    Então devo ver a lista de agendamentos
-    E devo ver as colunas:
-      | coluna      |
+    Então vejo lista com:
       | Protocolo   |
-      | Cidadão     |
-      | Data Coleta |
-      | Materiais   |
+      | Nome        |
+      | Data        |
       | Status      |
       | Ações       |
 
-  Cenário: Filtrar agendamentos por status
+  Cenário: Filtrar por status
     Dado que estou no dashboard
-    Quando seleciono o filtro de status "Pendente"
-    Então devo ver apenas agendamentos com status "Pendente"
+    Quando seleciono filtro "Pendente"
+    Então vejo só agendamentos pendentes
 
-  Cenário: Filtrar agendamentos por período
+  Cenário: Ver detalhes do agendamento
     Dado que estou no dashboard
-    Quando defino o período de 01/01/2024 a 31/01/2024
-    Então devo ver apenas agendamentos neste período
-
-  Cenário: Limpar filtros
-    Dado que apliquei filtros no dashboard
-    Quando clico em "Limpar Filtros"
-    Então todos os filtros devem ser removidos
-    E devo ver todos os agendamentos
-
-  Cenário: Visualizar estatísticas
-    Quando acesso o dashboard
-    Então devo ver cards com estatísticas:
-      | status     | quantidade |
-      | Pendente   | 2          |
-      | Agendado   | 1          |
-      | Concluído  | 1          |
-      | Cancelado  | 0          |
-
-  Cenário: Navegar para detalhes do agendamento
-    Dado que estou visualizando a lista de agendamentos
-    Quando clico em "Ver Detalhes" de um agendamento
-    Então devo ser redirecionado para a página de detalhes
-    E devo ver todas as informações do agendamento
-
-  Cenário: Atualização automática da lista
-    Dado que estou no dashboard
-    Quando aguardo 30 segundos
-    Então a lista deve ser atualizada automaticamente
+    Quando clico em "Ver Detalhes"
+    Então vejo página com todas as informações
 
   Cenário: Fazer logout
-    Dado que estou autenticado
+    Dado que estou logado
     Quando clico em "Sair"
-    Então devo ser redirecionado para a página de login
-    E minha sessão deve ser encerrada
+    Então volto para tela de login

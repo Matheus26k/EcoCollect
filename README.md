@@ -108,41 +108,44 @@ npm run test:api
 
 ## 📊 Testes Implementados
 
-### Testes Unitários
-- Regras de negócio (validação de data, protocolo)
-- Funções utilitárias
-- Localização: `backend/src/__tests__/`
+### Testes Unitários (Jest)
+- ✅ Validação de data (2 dias úteis)
+- ✅ Geração de protocolo
+- ✅ Regras de status
+- **Localização**: `backend/src/__tests__/`
 
-### Testes de API
-- Endpoints de autenticação
-- CRUD de agendamentos
-- Localização: `backend/src/__tests__/api/`
+### Testes de API (Supertest)
+- ✅ Login de administrador
+- ✅ Criar agendamento
+- ✅ Listar agendamentos
+- **Localização**: `backend/src/__tests__/api/`
 
-### Testes E2E
-- Fluxo de agendamento
-- Dashboard administrativo
-- Localização: `tests/cypress/`
+### Testes E2E (Cypress)
+- ✅ Fluxo completo de agendamento
+- ✅ Dashboard administrativo
+- ✅ Consulta por protocolo
+- **Localização**: `tests/cypress/`
 
 ### Especificações Gherkin
-- Cenários de uso em português
-- Localização: `tests/features/`
+- ✅ Cenários em português simples
+- ✅ Casos de uso principais
+- **Localização**: `tests/features/`
 
-## 🐛 Relatório de Bugs Identificados
+## 🐛 Problemas Encontrados
 
-### Bug #001 - Validação de Data no Frontend
-**Descrição**: Durante teste manual, identificado que o campo de data permite seleção de datas passadas no frontend, mesmo com validação no backend.
+### Bug #001 - Data no Frontend
+**O que acontece**: Usuário pode selecionar data passada no calendário
 
-**Passos para Reproduzir**:
-1. Acessar formulário de agendamento
-2. Selecionar data anterior à atual
-3. Tentar submeter formulário
+**Como reproduzir**:
+1. Abrir formulário de agendamento
+2. Selecionar data de ontem
+3. Clicar em "Agendar"
 
-**Resultado Esperado**: Campo deve bloquear datas passadas
-**Resultado Atual**: Permite seleção, erro só aparece após submissão
+**O que deveria acontecer**: Bloquear datas passadas no calendário
+**O que acontece**: Só dá erro depois de enviar
 
-**Severidade**: Média
-**Status**: Identificado
-**Correção Sugerida**: Implementar validação client-side no componente DatePicker
+**Como corrigir**: Configurar calendário para só mostrar datas futuras
+**Prioridade**: Média
 
 ## 📋 Status dos Requisitos
 
