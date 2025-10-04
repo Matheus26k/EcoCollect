@@ -249,4 +249,4 @@ Este documento define a estratégia de testes para o Sistema de Coletas Reciclá
 ---
 
 **Versão**: 1.0  
-**Data**: Janeiro 2025
+**Data**: Outubro 2025
