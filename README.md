@@ -83,6 +83,27 @@ npm start
 - **Backend API**: http://localhost:3001
 - **Banco SQLite**: `backend/dev.db`
 
+### Visualizar Banco de Dados
+
+**Opção 1 - Prisma Studio (Recomendado):**
+```bash
+cd backend
+npx prisma studio
+```
+Acesse: http://localhost:5555
+
+**Opção 2 - SQLite Browser:**
+- Baixe [DB Browser for SQLite](https://sqlitebrowser.org/)
+- Abra o arquivo `backend/dev.db`
+
+**Opção 3 - Linha de Comando:**
+```bash
+cd backend
+sqlite3 dev.db
+.tables
+SELECT * FROM agendamentos;
+```
+
 ### Acesso Administrativo
 - **Token de acesso**: `E3c0A2d0m2i5n9X7`
 - Digite o token na tela de login para revelar as credenciais
