@@ -1,5 +1,4 @@
 import { AgendamentoRepository } from '../repositories/AgendamentoRepository';
-import { EmailService } from './EmailService';
 import { generateProtocol, isBusinessDay, addBusinessDays } from '../utils/helpers';
 
 interface CreateAgendamentoData {
@@ -28,7 +27,6 @@ interface UpdateStatusData {
 
 export class AgendamentoService {
   private agendamentoRepository = new AgendamentoRepository();
-  private emailService = new EmailService();
 
   async create(data: CreateAgendamentoData) {
     const dataSugerida = new Date(data.dataSugerida);
@@ -41,23 +39,11 @@ export class AgendamentoService {
 
     const protocolo = generateProtocol();
 
-    const agendamento = await this.agendamentoRepository.create({
+    return await this.agendamentoRepository.create({
       ...data,
       protocolo,
       dataSugerida
     });
-
-    // Enviar e-mail de confirmação se email foi fornecido
-    if (data.email) {
-      try {
-        await this.emailService.sendAgendamentoConfirmation(agendamento);
-      } catch (error) {
-        console.error('Erro ao enviar e-mail:', error);
-        // Não falha o agendamento se o e-mail não for enviado
-      }
-    }
-
-    return agendamento;
   }
 
   async list(filters: ListFilters) {

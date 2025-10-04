@@ -15,7 +15,6 @@ Sistema web para agendamento de coletas de materiais recicláveis.
 - ✅ Solicitar agendamento de coleta
 - ✅ Preenchimento automático via CEP
 - ✅ Receber número de protocolo
-- ✅ Confirmação por e-mail (opcional)
 - ✅ Consultar status por protocolo
 - ✅ Formatação automática de telefone
 
@@ -48,15 +47,7 @@ cd backend
 npm install
 ```
 
-**2. Configurar variáveis de ambiente:**
-```bash
-# Copiar arquivo de exemplo
-cp .env.example .env
-
-# Editar .env com suas configurações de e-mail (opcional)
-```
-
-**3. Configurar banco de dados:**
+**2. Configurar banco de dados:
 ```bash
 # Executar migrations
 npx prisma migrate dev --name init
@@ -65,13 +56,13 @@ npx prisma migrate dev --name init
 npm run seed
 ```
 
-**4. Instalar dependências do frontend:**
+**3. Instalar dependências do frontend:**
 ```bash
 cd ../frontend
 npm install
 ```
 
-**5. Iniciar os serviços (2 terminais):**
+**4. Iniciar os serviços (2 terminais):**
 
 **Terminal 1 - Backend:**
 ```bash
