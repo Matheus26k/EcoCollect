@@ -44,7 +44,7 @@
 
 ## 📝 Resumo
 
-O código está bem estruturado para um projeto júnior. Os principais pontos de melhoria são:
+O código está bem estruturado e organizado. Os principais pontos de melhoria são:
 
 1. Corrigir validação de data no frontend
 2. Adicionar indicadores de carregamento
