@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import { toast } from 'react-toastify';
-import { Calendar, MapPin, Phone, Mail, Recycle, CheckCircle, Shield, Search } from 'lucide-react';
+import { Calendar, MapPin, Phone, Mail, Recycle, CheckCircle, Shield, Search, FileText, Package, Wine, Wrench, Smartphone, Droplets } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Logo from '../components/Logo';
 import { usePhoneFormat } from '../hooks/usePhoneFormat';
@@ -17,6 +17,26 @@ export default function Home() {
   const [cepValidated, setCepValidated] = useState(false);
   const phoneFormat = usePhoneFormat();
   const { lookupCep, loading: cepLoading, formatCep } = useCepLookup();
+
+  const getMaterialIcon = (materialName: string) => {
+    const iconProps = "h-4 w-4 text-primary-600";
+    switch (materialName.toLowerCase()) {
+      case 'papel':
+        return <FileText className={iconProps} />;
+      case 'plástico':
+        return <Package className={iconProps} />;
+      case 'vidro':
+        return <Wine className={iconProps} />;
+      case 'metal':
+        return <Wrench className={iconProps} />;
+      case 'eletrônicos':
+        return <Smartphone className={iconProps} />;
+      case 'óleo de cozinha':
+        return <Droplets className={iconProps} />;
+      default:
+        return <Recycle className={iconProps} />;
+    }
+  };
 
   const { register, handleSubmit, formState: { errors }, reset, watch, setValue, trigger } = useForm<CreateAgendamentoData>({ mode: 'onChange' });
 
@@ -420,7 +440,7 @@ export default function Home() {
               <div className="space-y-2">
                 {materialTypes.map((material) => (
                   <div key={material.id} className="flex items-center space-x-2">
-                    <Recycle className="h-4 w-4 text-primary-600" />
+                    {getMaterialIcon(material.name)}
                     <div>
                       <p className="font-medium text-gray-900">{material.name}</p>
                       {material.description && (

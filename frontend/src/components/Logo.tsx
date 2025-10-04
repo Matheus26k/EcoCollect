@@ -15,9 +15,8 @@ export default function Logo({ size = 'md', showText = true }: LogoProps) {
 
   return (
     <div className="flex items-center space-x-2">
-      <div className="relative">
+      <div>
         <Recycle className={`${sizes[size].icon} text-primary-600`} />
-        <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
       </div>
       {showText && (
         <div className="flex flex-col">
