@@ -11,7 +11,7 @@ interface LoginForm {
   password: string;
 }
 
-const ADMIN_TOKEN = 'ECO2024ADMIN';
+const ADMIN_TOKEN = 'E3c0A2d0m2i5n9X7';
 
 export default function Login() {
   const { login, isAuthenticated } = useAuth();

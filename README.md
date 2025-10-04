@@ -84,7 +84,7 @@ npm start
 - **Banco SQLite**: `backend/dev.db`
 
 ### Acesso Administrativo
-- **Token de acesso**: `ECO2024ADMIN`
+- **Token de acesso**: `E3c0A2d0m2i5n9X7`
 - Digite o token na tela de login para revelar as credenciais
 
 ## 🧪 Testes
