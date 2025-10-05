@@ -122,37 +122,43 @@ npm test
 ```
 
 ### Testes E2E
+
+**IMPORTANTE**: Inicie os serviços antes dos testes E2E:
+
 ```bash
+# Terminal 1 - Backend
+cd backend
+npm run dev
+
+# Terminal 2 - Frontend  
+cd frontend
+npm start
+
+# Terminal 3 - Testes E2E
 cd tests
 npm install
 npm run cypress:run
 ```
 
-### Testes de API
-```bash
-cd backend
-npm run test:api
-```
+
+
+**Vídeos e Screenshots:**
+- Vídeos salvos em: `tests/cypress/videos/`
+- Screenshots de falhas em: `tests/cypress/screenshots/`
 
 ## 📊 Testes Implementados
 
-### Testes Unitários (Jest)
-- ✅ Validação de data (2 dias úteis)
-- ✅ Geração de protocolo
-- ✅ Regras de status
+### Testes Unitários (Jest) - 3 testes
+- ✅ Validação de data de agendamento (2 dias úteis)
+- ✅ Geração de protocolo único
+- ✅ Regras de status de agendamento
 - **Localização**: `backend/src/__tests__/`
 
-### Testes de API (Supertest)
-- ✅ Login de administrador
-- ✅ Criar agendamento
-- ✅ Listar agendamentos
-- **Localização**: `backend/src/__tests__/api/`
-
-### Testes E2E (Cypress)
-- ✅ Fluxo completo de agendamento
-- ✅ Dashboard administrativo
-- ✅ Consulta por protocolo
-- **Localização**: `tests/cypress/`
+### Testes E2E (Cypress) - 3 testes
+- ✅ Criar agendamento de coleta (`criar-agendamento.cy.js`)
+- ✅ Validação do formulário (`validacao-formulario.cy.js`)
+- ✅ Navegação do sistema (`navegacao-sistema.cy.js`)
+- **Localização**: `tests/cypress/e2e/`
 
 ### Especificações Gherkin
 - ✅ Cenários em português simples
@@ -215,7 +221,7 @@ npm run test:api
 
 ### Requisitos Não Funcionais Atendidos ✅
 - RQNF1: Linguagens OO (JavaScript/TypeScript + SQLite)
-- RQNF2: 3+ testes unitários com regras de negócio
+- RQNF2: 3 testes unitários com regras de negócio
 - RQNF3: Códigos HTTP apropriados
 - RQNF4: Tratamento de erros no frontend
 - RQNF5: Testes automatizados de API

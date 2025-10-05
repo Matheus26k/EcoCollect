@@ -5,6 +5,7 @@ const prisma = new PrismaClient();
 interface CreateAgendamentoData {
   protocolo: string;
   nomeCompleto: string;
+  cep: string;
   endereco: string;
   numero: string;
   bairro: string;

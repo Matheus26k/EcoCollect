@@ -106,9 +106,8 @@ Este documento descreve o plano de testes para o sistema EcoCollect, incluindo c
 ## 📊 Cobertura de Testes
 
 ### Testes Automatizados
-- **Unitários**: 3+ testes com regras de negócio
-- **API**: Testes de endpoints principais
-- **E2E**: Fluxos críticos com Cypress
+- **Unitários**: 3 testes com regras de negócio
+- **E2E**: 3 testes principais com Cypress
 
 ### Testes Manuais
 - Validação de bugs conhecidos
@@ -123,11 +122,7 @@ cd backend
 npm test
 ```
 
-### Testes de API
-```bash
-cd backend
-npm run test:api
-```
+
 
 ### Testes E2E
 ```bash
