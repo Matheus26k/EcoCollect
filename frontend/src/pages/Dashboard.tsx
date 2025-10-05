@@ -20,11 +20,13 @@ export default function Dashboard() {
   const [showFilters, setShowFilters] = useState(false);
   const [showTable, setShowTable] = useState(true);
 
+  const REFRESH_INTERVAL_MS = 30000;
+  
   const { data: agendamentos = [], isLoading, refetch } = useQuery<Agendamento[]>(
     ['agendamentos', filters],
     () => agendamentoService.list(filters),
     {
-      refetchInterval: 30000, // Atualiza a cada 30 segundos
+      refetchInterval: REFRESH_INTERVAL_MS,
     }
   );
 

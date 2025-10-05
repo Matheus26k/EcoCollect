@@ -1,31 +1,30 @@
 describe('Navegação do Sistema', () => {
+  const TEMPO_CARREGAMENTO = 2000;
+  const TEMPO_INTERACAO = 1000;
+  const TEMPO_NAVEGACAO = 1500;
+  
   it('deve permitir navegar entre páginas principais', () => {
     cy.visit('/');
-    cy.wait(2000); // Aguardar carregamento
+    cy.wait(TEMPO_CARREGAMENTO);
     
     cy.get('body').should('exist');
-    cy.wait(1000);
+    cy.wait(TEMPO_INTERACAO);
     
-    // Localizar link de consulta
     cy.contains('Consultar').should('be.visible');
-    cy.wait(1500);
+    cy.wait(TEMPO_NAVEGACAO);
     
-    // Clicar no link
     cy.contains('Consultar').click();
-    cy.wait(2000);
+    cy.wait(TEMPO_CARREGAMENTO);
     
-    // Verificar navegação
     cy.url().should('include', '/consulta');
-    cy.wait(1500);
+    cy.wait(TEMPO_NAVEGACAO);
     
-    // Voltar para home
     cy.visit('/');
-    cy.wait(2000);
+    cy.wait(TEMPO_CARREGAMENTO);
     
-    // Testar link administrativo
     cy.contains('Administrativa').should('be.visible');
-    cy.wait(1000);
+    cy.wait(TEMPO_INTERACAO);
     cy.contains('Administrativa').click();
-    cy.wait(2000);
+    cy.wait(TEMPO_CARREGAMENTO);
   });
 });

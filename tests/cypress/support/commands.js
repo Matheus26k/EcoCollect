@@ -1,7 +1,9 @@
-// Comandos customizados do Cypress para EcoCollect
+const DEFAULT_ADMIN_EMAIL = 'admin@ecocollect.com';
+const DEFAULT_ADMIN_PASSWORD = 'admin123';
+const DAYS_AHEAD_FOR_SCHEDULING = 5;
+const LOADING_TIMEOUT = 10000;
 
-// Comando para fazer login
-Cypress.Commands.add('login', (email = 'admin@ecocollect.com', password = 'admin123') => {
+Cypress.Commands.add('login', (email = DEFAULT_ADMIN_EMAIL, password = DEFAULT_ADMIN_PASSWORD) => {
   cy.visit('/login');
   cy.get('input[type="email"]').type(email);
   cy.get('input[type="password"]').type(password);
@@ -9,7 +11,6 @@ Cypress.Commands.add('login', (email = 'admin@ecocollect.com', password = 'admin
   cy.url().should('include', '/dashboard');
 });
 
-// Comando para criar agendamento
 Cypress.Commands.add('createAgendamento', (agendamentoData) => {
   const defaultData = {
     nomeCompleto: 'João Silva Teste',
@@ -24,7 +25,6 @@ Cypress.Commands.add('createAgendamento', (agendamentoData) => {
 
   cy.visit('/');
   
-  // Preencher formulário
   cy.get('input[name="nomeCompleto"]').type(defaultData.nomeCompleto);
   cy.get('input[name="endereco"]').type(defaultData.endereco);
   cy.get('input[name="numero"]').type(defaultData.numero);
@@ -36,22 +36,17 @@ Cypress.Commands.add('createAgendamento', (agendamentoData) => {
     cy.get('input[name="email"]').type(defaultData.email);
   }
 
-  // Selecionar data futura
   const futureDate = new Date();
-  futureDate.setDate(futureDate.getDate() + 5);
+  futureDate.setDate(futureDate.getDate() + DAYS_AHEAD_FOR_SCHEDULING);
   const dateString = futureDate.toISOString().split('T')[0];
   cy.get('input[name="dataSugerida"]').type(dateString);
 
-  // Selecionar pelo menos um material
   cy.get('input[type="checkbox"]').first().check();
-
-  // Submeter
   cy.get('button[type="submit"]').click();
 });
 
-// Comando para aguardar carregamento
 Cypress.Commands.add('waitForLoad', () => {
-  cy.get('[data-testid="loading"]', { timeout: 10000 }).should('not.exist');
+  cy.get('[data-testid="loading"]', { timeout: LOADING_TIMEOUT }).should('not.exist');
 });
 
 // Declarações TypeScript para os comandos customizados

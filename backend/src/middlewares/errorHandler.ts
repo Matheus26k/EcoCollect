@@ -6,15 +6,16 @@ export const errorHandler = (
   res: Response,
   next: NextFunction
 ) => {
-  console.error('Error:', error);
+  const BAD_REQUEST = 400;
+  const INTERNAL_SERVER_ERROR = 500;
 
   if (error.message.includes('Data deve ser')) {
-    return res.status(400).json({ error: error.message });
+    return res.status(BAD_REQUEST).json({ error: error.message });
   }
 
   if (error.message.includes('Observações são obrigatórias')) {
-    return res.status(400).json({ error: error.message });
+    return res.status(BAD_REQUEST).json({ error: error.message });
   }
 
-  res.status(500).json({ error: 'Erro interno do servidor' });
+  res.status(INTERNAL_SERVER_ERROR).json({ error: 'Erro interno do servidor' });
 };

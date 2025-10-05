@@ -20,7 +20,7 @@ export class AgendamentoController {
 
       const agendamento = await this.agendamentoService.create(value);
       res.status(201).json(agendamento);
-    } catch (error) {
+    } catch (error: any) {
       res.status(500).json({ error: 'Erro interno do servidor' });
     }
   };

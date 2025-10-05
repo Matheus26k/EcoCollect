@@ -10,7 +10,6 @@ export const api = axios.create({
   },
 });
 
-// Interceptor para adicionar token
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
   if (token) {
@@ -19,17 +18,19 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// Interceptor para tratar erros
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
+    const UNAUTHORIZED = 401;
+    const DEFAULT_ERROR_MESSAGE = 'Erro interno do servidor';
+    
+    if (error.response?.status === UNAUTHORIZED) {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       window.location.href = '/login';
     }
     
-    const message = error.response?.data?.error || 'Erro interno do servidor';
+    const message = error.response?.data?.error || DEFAULT_ERROR_MESSAGE;
     toast.error(message);
     
     return Promise.reject(error);

@@ -6,13 +6,13 @@ describe('Validação de Data de Agendamento', () => {
     const amanha = new Date();
     amanha.setDate(hoje.getDate() + 1);
     
-    const dataMinima = addBusinessDays(hoje, 2);
+    const DIAS_UTEIS_MINIMOS = 2;
+    const DIAS_UTEIS_VALIDOS = 3;
     
-    // Data de amanhã deve ser menor que a mínima exigida
+    const dataMinima = addBusinessDays(hoje, DIAS_UTEIS_MINIMOS);
+    const dataValida = addBusinessDays(hoje, DIAS_UTEIS_VALIDOS);
+    
     expect(amanha.getTime()).toBeLessThan(dataMinima.getTime());
-    
-    // Data com 3 dias úteis deve ser aceita
-    const dataValida = addBusinessDays(hoje, 3);
     expect(dataValida.getTime()).toBeGreaterThan(dataMinima.getTime());
   });
 });

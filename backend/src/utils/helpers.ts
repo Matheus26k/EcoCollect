@@ -6,7 +6,9 @@ export function generateProtocol(): string {
 
 export function isBusinessDay(date: Date): boolean {
   const day = date.getDay();
-  return day !== 0 && day !== 6; // 0 = domingo, 6 = sábado
+  const SUNDAY = 0;
+  const SATURDAY = 6;
+  return day !== SUNDAY && day !== SATURDAY;
 }
 
 export function addBusinessDays(startDate: Date, businessDays: number): Date {

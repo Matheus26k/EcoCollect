@@ -52,7 +52,7 @@ export class AgendamentoRepository {
 
   async findMany(filters: ListFilters) {
     const where: any = {
-      deletedAt: null // Só buscar registros não excluídos
+      deletedAt: null
     };
 
     if (filters.status) {

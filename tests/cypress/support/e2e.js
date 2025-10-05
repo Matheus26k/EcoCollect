@@ -1,17 +1,12 @@
-// Arquivo de configuração global do Cypress
-// Carregado automaticamente antes dos testes
-
-// Import commands.js using ES2015 syntax:
 import './commands'
 
-// Alternatively you can use CommonJS syntax:
-// require('./commands')
-
-// Ocultar requisições do log de comandos
 const app = window.top;
-if (!app.document.head.querySelector('[data-hide-command-log-request]')) {
+const HIDE_COMMAND_LOG_SELECTOR = '[data-hide-command-log-request]';
+const HIDE_COMMAND_LOG_STYLES = '.command-name-request, .command-name-xhr { display: none }';
+
+if (!app.document.head.querySelector(HIDE_COMMAND_LOG_SELECTOR)) {
   const style = app.document.createElement('style');
-  style.innerHTML = '.command-name-request, .command-name-xhr { display: none }';
+  style.innerHTML = HIDE_COMMAND_LOG_STYLES;
   style.setAttribute('data-hide-command-log-request', '');
   app.document.head.appendChild(style);
 }

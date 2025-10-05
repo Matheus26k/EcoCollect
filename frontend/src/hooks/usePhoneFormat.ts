@@ -4,16 +4,18 @@ export const usePhoneFormat = (initialValue = '') => {
   const [value, setValue] = useState(initialValue);
 
   const formatPhone = (input: string) => {
-    // Remove tudo que não é número
     const numbers = input.replace(/\D/g, '');
     
-    // Aplica a máscara (XX) XXXXX-XXXX
-    if (numbers.length <= 2) {
+    const DDD_LENGTH = 2;
+    const FIRST_PART_LENGTH = 7;
+    const MAX_PHONE_LENGTH = 11;
+    
+    if (numbers.length <= DDD_LENGTH) {
       return numbers;
-    } else if (numbers.length <= 7) {
-      return `(${numbers.slice(0, 2)}) ${numbers.slice(2)}`;
+    } else if (numbers.length <= FIRST_PART_LENGTH) {
+      return `(${numbers.slice(0, DDD_LENGTH)}) ${numbers.slice(DDD_LENGTH)}`;
     } else {
-      return `(${numbers.slice(0, 2)}) ${numbers.slice(2, 7)}-${numbers.slice(7, 11)}`;
+      return `(${numbers.slice(0, DDD_LENGTH)}) ${numbers.slice(DDD_LENGTH, FIRST_PART_LENGTH)}-${numbers.slice(FIRST_PART_LENGTH, MAX_PHONE_LENGTH)}`;
     }
   };
 

@@ -43,3 +43,8 @@ coverage/
 # Cypress
 cypress/videos/
 cypress/screenshots/
+
+# Documentation - Internal Review Files
+docs/revisao-codigo.md
+docs/revisao-clean-code.md
+docs/plano-testes.md

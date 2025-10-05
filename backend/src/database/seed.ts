@@ -4,27 +4,27 @@ import bcrypt from 'bcryptjs';
 const prisma = new PrismaClient();
 
 async function main() {
-  // Credenciais fixas para admin
-  const adminEmail = 'admin@ecocollect.com';
-  const adminPassword = 'admin123';
-  const hashedPassword = await bcrypt.hash(adminPassword, 10);
+  const ADMIN_EMAIL = 'admin@ecocollect.com';
+  const ADMIN_PASSWORD = 'admin123';
+  const ADMIN_NAME = 'Administrador EcoCollect';
+  const ADMIN_ROLE = 'admin';
+  const BCRYPT_SALT_ROUNDS = 10;
   
-  // Deletar usuário existente se houver
+  const hashedPassword = await bcrypt.hash(ADMIN_PASSWORD, BCRYPT_SALT_ROUNDS);
+  
   await prisma.user.deleteMany({
-    where: { email: adminEmail }
+    where: { email: ADMIN_EMAIL }
   });
 
-  // Criar novo usuário
   await prisma.user.create({
     data: {
-      email: adminEmail,
+      email: ADMIN_EMAIL,
       password: hashedPassword,
-      name: 'Administrador EcoCollect',
-      role: 'admin'
+      name: ADMIN_NAME,
+      role: ADMIN_ROLE
     }
   });
 
-  // Criar tipos de materiais
   const materialTypes = [
     { name: 'Papel', description: 'Jornais, revistas, papelão', category: 'seco' },
     { name: 'Plástico', description: 'Garrafas PET, embalagens', category: 'seco' },
