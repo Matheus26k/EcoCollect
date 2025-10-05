@@ -65,4 +65,13 @@ export class AgendamentoService {
   async getByProtocolo(protocolo: string) {
     return await this.agendamentoRepository.findByProtocolo(protocolo);
   }
+
+  async delete(id: string) {
+    const agendamento = await this.agendamentoRepository.findById(id);
+    if (!agendamento) {
+      throw new Error('Agendamento não encontrado');
+    }
+
+    return await this.agendamentoRepository.softDelete(id);
+  }
 }

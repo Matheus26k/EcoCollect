@@ -51,7 +51,9 @@ export class AgendamentoRepository {
   }
 
   async findMany(filters: ListFilters) {
-    const where: any = {};
+    const where: any = {
+      deletedAt: null // Só buscar registros não excluídos
+    };
 
     if (filters.status) {
       where.status = filters.status;
@@ -83,8 +85,11 @@ export class AgendamentoRepository {
   }
 
   async findById(id: string) {
-    return await prisma.agendamento.findUnique({
-      where: { id },
+    return await prisma.agendamento.findFirst({
+      where: { 
+        id,
+        deletedAt: null
+      },
       include: {
         materiais: {
           include: {
@@ -113,14 +118,26 @@ export class AgendamentoRepository {
   }
 
   async findByProtocolo(protocolo: string) {
-    return await prisma.agendamento.findUnique({
-      where: { protocolo },
+    return await prisma.agendamento.findFirst({
+      where: { 
+        protocolo,
+        deletedAt: null
+      },
       include: {
         materiais: {
           include: {
             material: true
           }
         }
+      }
+    });
+  }
+
+  async softDelete(id: string) {
+    return await prisma.agendamento.update({
+      where: { id },
+      data: {
+        deletedAt: new Date()
       }
     });
   }

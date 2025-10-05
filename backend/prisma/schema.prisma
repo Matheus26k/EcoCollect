@@ -48,6 +48,7 @@ model Agendamento {
   status          String   @default("Pendente")
   observacoes     String?
   dataAtualizacao DateTime @default(now())
+  deletedAt       DateTime?
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 

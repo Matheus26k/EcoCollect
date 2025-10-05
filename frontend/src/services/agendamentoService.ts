@@ -36,4 +36,8 @@ export const agendamentoService = {
     const response = await api.get(`/agendamentos/protocolo/${protocolo}`);
     return response.data;
   },
+
+  async delete(id: string): Promise<void> {
+    await api.delete(`/agendamentos/${id}`);
+  },
 };
